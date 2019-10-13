@@ -8,10 +8,10 @@ public abstract class Building : MonoBehaviour
     protected int maxHP;
     protected string team;  
 
-    public Building(int hP, int maxHP, string team)
+    public Building(int hP, string team)
     {
         this.hP = hP;
-        this.maxHP = maxHP;
+        maxHP = hP;
         this.team = team;
     }
 
@@ -19,7 +19,22 @@ public abstract class Building : MonoBehaviour
     public int MaxHP { get => maxHP;}
     public string Team { get => team;}
 
-    public abstract bool Death();
+    public bool Death()
+    {//checks to see if this unit is dead
+        bool death;
+        death = false;
+
+        if (HP <= 0)
+        {
+            death = true;
+            HP = 0;
+        }
+
+        return death;
+
+    }
+
+
     public abstract string toString();
 }
 
