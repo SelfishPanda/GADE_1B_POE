@@ -50,10 +50,41 @@ public abstract class Unit : MonoBehaviour
     }
 
 
-    public Unit ClosestUnit()
-    {
-        return null;
-    }
+     public Unit ClosestUnit(Unit[] units)
+     {
+         float closestDist = int.MaxValue;
+
+        Unit Closestunit = null;
+
+        foreach (Unit unit in units)
+         {
+           
+
+            if (unit == this)
+             {
+             }
+             else
+             {
+                 float distance = (this.transform.position - unit.transform.position).sqrMagnitude;
+
+                 if (distance < closestDist)
+                 {
+                     closestDist = distance;
+                     Closestunit = unit;
+
+                 }
+             }
+         }
+
+         
+        Debug.Log(Closestunit.transform.position);
+         Debug.DrawLine(this.transform.position, Closestunit.transform.position);
+         return Closestunit;       
+     }
+
+
+
+   
 
 
     public bool InAttackRange()
@@ -93,5 +124,10 @@ public abstract class Unit : MonoBehaviour
         string output = "";
         output = this.Name+" (" + team + ")" + "\n" + "Health Points : " + this.HP + "\n" + "X-Position : " + transform.position.x + "\n" + "Y-Position :" + transform.position.y;
         return output;
+    }
+
+    void GameEngine()
+    {
+
     }
 }

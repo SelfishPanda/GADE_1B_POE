@@ -33,7 +33,7 @@ public abstract class Building : MonoBehaviour
         return death;
 
     }
-    kaka poo poo
+    
 
     public abstract string toString();
 }

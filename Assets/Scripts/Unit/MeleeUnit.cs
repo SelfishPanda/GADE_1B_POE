@@ -17,6 +17,9 @@ public class MeleeUnit : Unit
     // Update is called once per frame
     void Update()
     {
-        
+        ClosestUnit(GameObject.FindObjectsOfType<Unit>());
     }
+
+   
+
 }
