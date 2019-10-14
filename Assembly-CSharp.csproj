@@ -63,6 +63,7 @@
     <Compile Include="Assets\Scripts\Building\Building.cs" />
     <Compile Include="Assets\Scripts\Building\FactoryBuilding.cs" />
     <Compile Include="Assets\Scripts\Building\ResourceBuilding.cs" />
+    <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Unit\MeleeUnit.cs" />
     <Compile Include="Assets\Scripts\Unit\RangedUnit.cs" />
     <Compile Include="Assets\Scripts\Unit\Unit.cs" />

@@ -87,9 +87,17 @@ public abstract class Unit : MonoBehaviour
    
 
 
-    public bool InAttackRange()
+    public bool InAttackRange(Unit Enemy)
     {
-        return false;
+        if ((this.transform.position - Enemy.transform.position).sqrMagnitude <= this.AttackRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+      
     }
 
 
