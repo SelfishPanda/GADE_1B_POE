@@ -7,8 +7,7 @@ public class MeleeUnit : Unit
 
    
 
-    [SerializeField]
-    GameObject gameObj = new GameObject();
+   
 
     // Start is called before the first frame update
     void Start()
@@ -54,11 +53,7 @@ public class MeleeUnit : Unit
 
 
        
-    if (Input.GetKeyDown(KeyCode.G))
-        {
-            Instantiate(gameObj, new Vector3(0,0,0),Quaternion.identity);
-        }
-    }
+    
 
    
 

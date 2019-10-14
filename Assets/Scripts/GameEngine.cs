@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class GameEngine : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] GameObject[] options = new GameObject[2];
+    [SerializeField] static int MIN_X = 20, MAX_X = 20, MIN_Y = 20, MAX_Y = 20, UNITS_5;
+
+
     void Start()
     {
         
@@ -14,5 +17,11 @@ public class GameEngine : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void CreateUnit()
+    {
+        GameObject unit = Instantiate(options[Random.Range(0,2)]);
+       
     }
 }

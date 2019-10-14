@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Wizard : Unit
 {
-    public Wizard(int hp, int attack, int attackRange, int speed, string name, string team, bool isAttacking) : base(hp, attack, attackRange, speed, name, team, isAttacking)
-    {
-    }
+   
 
     public void WiazrdAOE()
     {
@@ -16,7 +14,19 @@ public class Wizard : Unit
     // Start is called before the first frame update
     void Start()
     {
-        
+        int random = 0;
+
+        random = Random.Range(0, 2);
+
+        hP = 120;
+        maxHP = hP;
+        attack = 6;
+        attackRange = 1;
+        speed = 1;
+        name = "Mage";
+        isAttacking = false;
+        team = "Neutral";
+       
     }
 
     // Update is called once per frame
