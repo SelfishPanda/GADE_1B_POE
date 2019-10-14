@@ -121,9 +121,9 @@ public abstract class Unit : MonoBehaviour
     }
 
 
-    public void Movement()
+    public void Movement(Unit Enemy)
     {
-
+        transform.position = Vector3.MoveTowards(this.transform.position, Enemy.transform.position, Time.deltaTime);
     }
 
 
@@ -132,10 +132,5 @@ public abstract class Unit : MonoBehaviour
         string output = "";
         output = this.Name+" (" + team + ")" + "\n" + "Health Points : " + this.HP + "\n" + "X-Position : " + transform.position.x + "\n" + "Y-Position :" + transform.position.y;
         return output;
-    }
-
-    void GameEngine()
-    {
-
-    }
+    }  
 }
