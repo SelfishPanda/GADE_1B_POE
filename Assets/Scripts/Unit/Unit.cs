@@ -13,17 +13,6 @@ public abstract class Unit : MonoBehaviour
     protected string team;
     protected bool isAttacking;
 
-    protected Unit(int hp, int attack, int attackRange, int speed, string name, string team, bool isAttacking)
-    {
-        this.hP = hp;
-        maxHP = hp;
-        this.attack = attack;
-        this.attackRange = attackRange;
-        this.speed = speed;
-        this.name = name;
-        this.team = team;
-        this.isAttacking = isAttacking;
-    }
 
     public int HP { get => hP; set => hP = value; }
     public int MaxHP { get => maxHP;}

@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c0c43424f114d41a6f228c76824aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameObj: {fileID: 0}
 --- !u!23 &200531496
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -425,6 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c0c43424f114d41a6f228c76824aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameObj: {fileID: 0}
 --- !u!23 &922917893
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -502,6 +504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c0c43424f114d41a6f228c76824aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameObj: {fileID: 2108768681}
 --- !u!1001 &5904595027855514302
 PrefabInstance:
   m_ObjectHideFlags: 0
