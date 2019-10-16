@@ -38,24 +38,19 @@ public abstract class Unit : MonoBehaviour
         return dead;
     }
 
-
+    //ClosestUnit
      public Unit ClosestUnit(Unit[] units)
      {
          float closestDist = int.MaxValue;
-
         Unit Closestunit = null;
-
         foreach (Unit unit in units)
-         {
-           
-
+         {           
             if (unit == this)
              {
              }
              else
              {
-                 float distance = (this.transform.position - unit.transform.position).sqrMagnitude;
-
+                 float distance = Vector3.Distance(this.transform.position,unit.transform.position);
                  if (distance < closestDist)
                  {
                      closestDist = distance;
@@ -63,22 +58,44 @@ public abstract class Unit : MonoBehaviour
 
                  }
              }
-         }
-
-         
+         }        
         Debug.Log(Closestunit.transform.position);
          Debug.DrawLine(this.transform.position, Closestunit.transform.position);
          return Closestunit;       
      }
+    public Building ClosestUnit(Building[] units)
+    {
+        float closestDist = int.MaxValue;
+        Building Closestunit = null;
+        foreach (Building unit in units)
+        {
+            if (unit == this)
+            {
+            }
+            else
+            {
+                float distance = Vector3.Distance(this.transform.position, unit.transform.position);
+                if (distance < closestDist)
+                {
+                    closestDist = distance;
+                    Closestunit = unit;
+
+                }
+            }
+        }
+        Debug.Log(Closestunit.transform.position);
+        Debug.DrawLine(this.transform.position, Closestunit.transform.position);
+        return Closestunit;
+    }
 
 
 
-   
 
 
+    //AttackRange
     public bool InAttackRange(Unit Enemy)
     {
-        if ((this.transform.position - Enemy.transform.position).sqrMagnitude <= this.AttackRange)
+        if (Vector3.Distance(this.transform.position, Enemy.transform.position) <= this.AttackRange)
         {
             return true;
         }
@@ -88,8 +105,21 @@ public abstract class Unit : MonoBehaviour
         }
       
     }
+    public bool InAttackRange(Building Enemy)
+    {
+        if (Vector3.Distance(this.transform.position, Enemy.transform.position) <= this.AttackRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }
 
 
+    //Combat
     public void Combat(Unit Enemy)
     {
         if (Enemy.Death())
@@ -109,12 +139,15 @@ public abstract class Unit : MonoBehaviour
         }
     }
 
-
+    //Movement to enemy
     public void Movement(Unit Enemy)
     {
-        transform.position = Vector3.MoveTowards(this.transform.position, Enemy.transform.position, Time.deltaTime);
+        transform.position = Vector3.MoveTowards(this.transform.position, Enemy.transform.position, this.Speed*Time.deltaTime);
     }
-
+    public void Movement(Building Enemy)
+    {
+        transform.position = Vector3.MoveTowards(this.transform.position, Enemy.transform.position, this.Speed * Time.deltaTime);
+    }
 
     public override string ToString()
     {
@@ -122,4 +155,32 @@ public abstract class Unit : MonoBehaviour
         output = this.Name+" (" + team + ")" + "\n" + "Health Points : " + this.HP + "\n" + "X-Position : " + transform.position.x + "\n" + "Y-Position :" + transform.position.y;
         return output;
     }  
+
+    public Unit[] EnemyUnits(Unit[] Units)
+    {
+        Unit[] enemyUnits = new Unit[0];
+
+        for (int i = 0; i < Units.Length; i++)
+        {
+            if (this.Team == "Team 2")
+            {
+                if (Units[i].Team == "Team 1")
+                {
+                    System.Array.Resize(ref Units, i + 1);
+                    enemyUnits[i] = Units[i];
+                }
+            }
+            if (this.Team == "Team 1")
+            {
+                if (Units[i].Team == "Team 2")
+                {
+                    System.Array.Resize(ref Units, i + 1);
+                    enemyUnits[i] = Units[i];
+                }
+            }
+
+        }
+        return enemyUnits;
+    }
+
 }

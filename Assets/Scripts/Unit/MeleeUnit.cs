@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MeleeUnit : Unit
 {
 
@@ -20,11 +21,12 @@ public class MeleeUnit : Unit
         maxHP = hP;
         attack = 5;
         attackRange = 1;
-        speed = 1;
+        speed = 2;
         name = "Knight";
         isAttacking = false;
 
-        if (random == 0)
+       
+        if (this.gameObject.tag == "Team 1")
         {
             team = "Team 1";
         }
@@ -38,9 +40,12 @@ public class MeleeUnit : Unit
     // Update is called once per frame
     void Update()
     {
-        Unit[] Units = GameObject.FindObjectsOfType<Unit>();
-        Unit closestUnit = ClosestUnit(Units); ;
-
+        Unit[] Units;        
+        Units = GameObject.FindObjectsOfType<Unit>();                
+        Unit closestUnit = ClosestUnit(Units);
+        Unit[] EnemyUnits;
+        EnemyUnits = this.EnemyUnits(Units);
+        
 
         if (!this.InAttackRange(closestUnit))
         {
