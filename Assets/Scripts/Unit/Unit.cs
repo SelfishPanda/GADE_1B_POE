@@ -30,11 +30,12 @@ public abstract class Unit : MonoBehaviour
         if (this.HP <= 0)
         {
             dead = true;
+            this.HP = 0;
         }
         else
         {
             dead = false;
-        }
+        }        
         return dead;
     }
 
@@ -57,7 +58,9 @@ public abstract class Unit : MonoBehaviour
          }        
         Debug.Log(Closestunit.ToString());
          Debug.DrawLine(this.transform.position, Closestunit.transform.position);
-         return Closestunit;       
+       
+            return Closestunit;
+        
      }
     public Building ClosestUnit(Building[] units)
     {
@@ -110,23 +113,12 @@ public abstract class Unit : MonoBehaviour
 
     //Combat
     public void Combat(Unit Enemy)
-    {
-        if (Enemy.Death())
-        {}
-        else if (isAttacking == true)
-        {
-            Enemy.HP = Enemy.HP - this.attack;
-        }
+    {      
+            Enemy.HP = Enemy.HP - this.attack;        
     }
     public void Combat(Building Enemy)
-    {
-        if (Enemy.Death())
-        { }
-        else if (isAttacking == true)
-        {
-            Enemy.HP = Enemy.HP - this.attack;
-        }
-        
+    {      
+            Enemy.HP = Enemy.HP - this.attack;              
     }
 
     //Movement to enemy
@@ -173,6 +165,46 @@ public abstract class Unit : MonoBehaviour
 
         }
         return enemyUnits;
+    }
+
+
+
+    void Update()
+    {
+        
+        if (Death())
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Unit[] Units;           
+            Unit[] EnemyUnits;
+            Units = GameObject.FindObjectsOfType<Unit>();
+            EnemyUnits = this.EnemyUnits(Units);
+            Unit closestUnit = ClosestUnit(EnemyUnits);
+
+            if (closestUnit == this)
+            { }
+            else
+            {
+               
+                bool attacking = this.InAttackRange(closestUnit);
+                if (!attacking)
+                {
+                    Movement(closestUnit);
+                }
+                else
+                {
+                    Combat(closestUnit);
+                    Debug.Log(closestUnit.HP);
+                }
+            }
+        }
+
+
+
+
     }
 
 }
