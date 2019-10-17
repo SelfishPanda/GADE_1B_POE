@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6319254067933696875}
   - component: {fileID: 1554037807369610603}
   - component: {fileID: 3511410548812496445}
+  - component: {fileID: 8658178164266324740}
   m_Layer: 0
   m_Name: Melee2
   m_TagString: Team 2
@@ -91,3 +92,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8658178164266324740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936944524471316756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c0c43424f114d41a6f228c76824aa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

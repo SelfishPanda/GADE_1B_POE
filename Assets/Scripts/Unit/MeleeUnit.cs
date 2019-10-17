@@ -6,8 +6,8 @@ using UnityEngine;
 public class MeleeUnit : Unit
 {
 
-   
 
+    [SerializeField] Unit[] thing;
    
 
     // Start is called before the first frame update
@@ -42,12 +42,14 @@ public class MeleeUnit : Unit
     {
         Unit[] Units;        
         Units = GameObject.FindObjectsOfType<Unit>();                
-        Unit closestUnit = ClosestUnit(Units);
+        
         Unit[] EnemyUnits;
         EnemyUnits = this.EnemyUnits(Units);
-        
+        thing = EnemyUnits;
+        Unit closestUnit = ClosestUnit(EnemyUnits);
+        bool attacking = this.InAttackRange(closestUnit);
 
-        if (!this.InAttackRange(closestUnit))
+        if (!attacking)
         {
             Movement(closestUnit);
         }

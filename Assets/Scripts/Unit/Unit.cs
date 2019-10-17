@@ -41,25 +41,21 @@ public abstract class Unit : MonoBehaviour
     //ClosestUnit
      public Unit ClosestUnit(Unit[] units)
      {
-         float closestDist = int.MaxValue;
+        float closestDist = int.MaxValue;
+        float distance = 0;
         Unit Closestunit = null;
+        Debug.Log(units.Length);
         foreach (Unit unit in units)
-         {           
-            if (unit == this)
-             {
-             }
-             else
-             {
-                 float distance = Vector3.Distance(this.transform.position,unit.transform.position);
+         {
+            Debug.Log(unit.Name);
+                 distance = Vector3.Distance(transform.position,unit.transform.position);
                  if (distance < closestDist)
                  {
                      closestDist = distance;
                      Closestunit = unit;
-
-                 }
-             }
+                 }             
          }        
-        Debug.Log(Closestunit.transform.position);
+        Debug.Log(Closestunit.ToString());
          Debug.DrawLine(this.transform.position, Closestunit.transform.position);
          return Closestunit;       
      }
@@ -68,20 +64,13 @@ public abstract class Unit : MonoBehaviour
         float closestDist = int.MaxValue;
         Building Closestunit = null;
         foreach (Building unit in units)
-        {
-            if (unit == this)
-            {
-            }
-            else
-            {
+        {           
                 float distance = Vector3.Distance(this.transform.position, unit.transform.position);
                 if (distance < closestDist)
                 {
                     closestDist = distance;
                     Closestunit = unit;
-
-                }
-            }
+                }            
         }
         Debug.Log(Closestunit.transform.position);
         Debug.DrawLine(this.transform.position, Closestunit.transform.position);
@@ -137,6 +126,7 @@ public abstract class Unit : MonoBehaviour
         {
             Enemy.HP = Enemy.HP - this.attack;
         }
+        
     }
 
     //Movement to enemy
@@ -148,6 +138,7 @@ public abstract class Unit : MonoBehaviour
     {
         transform.position = Vector3.MoveTowards(this.transform.position, Enemy.transform.position, this.Speed * Time.deltaTime);
     }
+
 
     public override string ToString()
     {
@@ -166,16 +157,17 @@ public abstract class Unit : MonoBehaviour
             {
                 if (Units[i].Team == "Team 1")
                 {
-                    System.Array.Resize(ref Units, i + 1);
-                    enemyUnits[i] = Units[i];
+                    System.Array.Resize(ref enemyUnits, enemyUnits.Length+1);
+                    enemyUnits[enemyUnits.Length-1] = Units[i]; 
+                    
                 }
             }
             if (this.Team == "Team 1")
             {
                 if (Units[i].Team == "Team 2")
                 {
-                    System.Array.Resize(ref Units, i + 1);
-                    enemyUnits[i] = Units[i];
+                    System.Array.Resize(ref enemyUnits, enemyUnits.Length + 1);
+                    enemyUnits[enemyUnits.Length - 1] = Units[i];
                 }
             }
 
