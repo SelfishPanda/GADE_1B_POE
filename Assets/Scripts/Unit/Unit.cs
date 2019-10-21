@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class Unit : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public abstract class Unit : MonoBehaviour
     protected string name;
     protected string team;
     protected bool isAttacking;
-
+    [SerializeField] public Image healthBar;
 
     public int HP { get => hP; set => hP = value; }
     public int MaxHP { get => maxHP;}
@@ -202,7 +203,8 @@ public abstract class Unit : MonoBehaviour
             }
         }
 
-
+        healthBar = GetComponentsInChildren<Image>()[1];
+        healthBar.fillAmount = (float)HP / MaxHP;
 
 
     }
