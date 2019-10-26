@@ -6,10 +6,7 @@ public class Wizard : Unit
 {
    
 
-    public void WiazrdAOE()
-    {
-
-    }
+   
 
     // Start is called before the first frame update
     void Start()

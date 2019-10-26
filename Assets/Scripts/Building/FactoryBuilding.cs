@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FactoryBuilding : Building
 {
@@ -9,6 +10,7 @@ public class FactoryBuilding : Building
     public Vector3 spawnYPos;
     protected int unitsProduced;
     private bool spawned;
+    [SerializeField] public Image healthBar;
     GameEngine gameEngine;
 
 
@@ -23,7 +25,7 @@ public class FactoryBuilding : Building
         gameEngine = GameObject.FindObjectOfType<GameEngine>();
         hP = 3000;
         maxHP = 2000;
-        this.productionSpeed = 200;
+        this.productionSpeed = 400;
         spawnYPos = new Vector3(transform.position.x,0,transform.position.z-1);
         unitToProduce = Random.Range(0, 2);
         this.unitsProduced = 0;
@@ -81,7 +83,8 @@ public class FactoryBuilding : Building
                 }
             }
         }
-        
+        healthBar = GetComponentsInChildren<Image>()[1];
+        healthBar.fillAmount = (float)HP / MaxHP;
     }
 
 

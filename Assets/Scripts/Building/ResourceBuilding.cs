@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResourceBuilding : Building
 {
@@ -8,6 +9,7 @@ public class ResourceBuilding : Building
     protected int resourcesGenerated;
     protected int resourcesGeneratedPerRound;
     protected int resourcePool;
+    [SerializeField] public Image healthBar;
     GameEngine gameEngine;
   
     // Start is called before the first frame update
@@ -64,6 +66,8 @@ public class ResourceBuilding : Building
                
             }
         }
+        healthBar = GetComponentsInChildren<Image>()[1];
+        healthBar.fillAmount = (float)HP / MaxHP;
     }
 
 

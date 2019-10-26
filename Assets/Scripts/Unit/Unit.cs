@@ -47,7 +47,7 @@ public abstract class Unit : MonoBehaviour
         float closestDist = int.MaxValue;
         float distance = 0;
         Unit Closestunit = null;
-        Debug.Log(units.Length);
+       
         foreach (Unit unit in units)
         {
 
@@ -66,8 +66,7 @@ public abstract class Unit : MonoBehaviour
                 }
             }
         }
-        Debug.Log(Closestunit.ToString());
-         Debug.DrawLine(this.transform.position, Closestunit.transform.position);
+       
        
             return Closestunit;
         
@@ -75,18 +74,26 @@ public abstract class Unit : MonoBehaviour
     public Building ClosestUnit(Building[] units)
     {
         float closestDist = int.MaxValue;
+        float distance = 0;
         Building Closestunit = null;
         foreach (Building unit in units)
-        {           
-                float distance = Vector3.Distance(this.transform.position, unit.transform.position);
+        {
+            distance = Vector3.Distance(transform.position, unit.transform.position);
+            if (unit.Team == this.Team)
+            {
+            }
+            else
+            {
+
+
                 if (distance < closestDist)
                 {
                     closestDist = distance;
                     Closestunit = unit;
-                }            
+                }
+            }
         }
-        Debug.Log(Closestunit.transform.position);
-        Debug.DrawLine(this.transform.position, Closestunit.transform.position);
+        
         return Closestunit;
     }
 
@@ -167,28 +174,49 @@ public abstract class Unit : MonoBehaviour
             Building[] buildings;
             Units = GameObject.FindObjectsOfType<Unit>();
             buildings = GameObject.FindObjectsOfType<Building>();
-            Unit closestUnit = ClosestUnit(Units);
-
-
-            if (closestUnit == this)
-            { }
-            else
+            Unit closestUnit = null;
+            if (Units != null)
             {
-               
-                bool attacking = this.InAttackRange(closestUnit);
+                closestUnit = ClosestUnit(Units);
+            }            
+            Building closestbuilding = ClosestUnit(buildings);
+
+           
+            if (closestUnit == null|| Vector3.Distance(transform.position, closestbuilding.transform.position) <= Vector3.Distance(transform.position, closestUnit.transform.position) && name != "Mage" && !closestbuilding.Death())
+            {
+                
+                bool attacking = this.InAttackRange(closestbuilding);
                 if (!attacking)
                 {
-                    Movement(closestUnit);
+                    Movement(closestbuilding);
                 }
                 else
                 {
-                    if (this.Name == "Wizard")
+                    Combat(closestbuilding);
+                }
+            }
+            else
+            {
+                if (closestUnit == this)
+                { }
+                else
+                {
+
+                    bool attacking = this.InAttackRange(closestUnit);
+                    if (!attacking)
                     {
-                        WizardAOE(Units);
+                        Movement(closestUnit);
                     }
                     else
                     {
-                        Combat(closestUnit);
+                        if (this.Name == "Mage")
+                        {
+                            WizardAOE(Units);
+                        }
+                        else
+                        {
+                            Combat(closestUnit);
+                        }
                     }
                 }
             }
@@ -205,7 +233,7 @@ public abstract class Unit : MonoBehaviour
             {
                 if (Vector3.Distance(units[i].transform.position,this.transform.position)<this.AttackRange)
                 {
-                    if (units[i].Name != "Wizard")
+                    if (units[i].Name != "Mage")
                     {
                         Combat(units[i]);
                     }
