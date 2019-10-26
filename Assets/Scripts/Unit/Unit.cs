@@ -165,65 +165,103 @@ public abstract class Unit : MonoBehaviour
         
         if (Death())
         {
+            GameEngine gameEngine = GameObject.FindObjectOfType<GameEngine>();
+            if (Team == "Team 1")
+            {
+                gameEngine.t2Resources += 50;
+            }
+            else
+            {
+                gameEngine.t1Resources += 50;
+            }
             Destroy(gameObject);
         }
         else
         {
-            
-            Unit[] Units;
-            Building[] buildings;
-            Units = GameObject.FindObjectsOfType<Unit>();
-            buildings = GameObject.FindObjectsOfType<Building>();
-            Unit closestUnit = null;
-            if (Units != null)
-            {
-                closestUnit = ClosestUnit(Units);
-            }            
-            Building closestbuilding = ClosestUnit(buildings);
-
            
-            if (closestUnit == null|| Vector3.Distance(transform.position, closestbuilding.transform.position) <= Vector3.Distance(transform.position, closestUnit.transform.position) && name != "Mage" && !closestbuilding.Death())
-            {
-                
-                bool attacking = this.InAttackRange(closestbuilding);
-                if (!attacking)
+
+
+                Unit[] Units;
+                Building[] buildings;
+                Units = GameObject.FindObjectsOfType<Unit>();
+                buildings = GameObject.FindObjectsOfType<Building>();
+                Unit closestUnit = null;
+                if (Units != null)
                 {
-                    Movement(closestbuilding);
+                    closestUnit = ClosestUnit(Units);
                 }
-                else
-                {
-                    Combat(closestbuilding);
-                }
-            }
-            else
-            {
-                if (closestUnit == this)
-                { }
-                else
+                Building closestbuilding = ClosestUnit(buildings);
+
+
+                if (closestUnit == null || Vector3.Distance(transform.position, closestbuilding.transform.position) <= Vector3.Distance(transform.position, closestUnit.transform.position) && name != "Mage" && !closestbuilding.Death())
                 {
 
-                    bool attacking = this.InAttackRange(closestUnit);
+                    bool attacking = this.InAttackRange(closestbuilding);
                     if (!attacking)
                     {
-                        Movement(closestUnit);
+                        Movement(closestbuilding);
                     }
                     else
                     {
-                        if (this.Name == "Mage")
+                        Combat(closestbuilding);
+                    }
+                }
+                else
+                {
+                    if (closestUnit == this)
+                    { }
+                    else
+                    {
+
+                        bool attacking = this.InAttackRange(closestUnit);
+                        if (!attacking)
                         {
-                            WizardAOE(Units);
+                            Movement(closestUnit);
                         }
                         else
                         {
-                            Combat(closestUnit);
+                            if (this.Name == "Mage")
+                            {
+                                WizardAOE(Units);
+                            }
+                            else
+                            {
+                                Combat(closestUnit);
+                            }
                         }
                     }
                 }
-            }
+            
         }
 
         healthBar = GetComponentsInChildren<Image>()[1];
         healthBar.fillAmount = (float)HP / MaxHP;
+    }
+
+    public bool RunAway()
+    {
+        if (Name == "Mage")
+        {
+            if (HP/MaxHP <= 0.5)
+            {
+                return true;
+            }
+            else
+            {
+                return false;     
+            }
+        }
+        else
+        {
+            if (HP / MaxHP <= 0.25)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 
     public void WizardAOE(Unit[] units)

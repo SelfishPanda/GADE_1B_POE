@@ -21,7 +21,7 @@ public class ResourceBuilding : Building
         resourceType = "Adamantium";
         resourcesGeneratedPerRound = 1;
         resourcesGenerated = 0;
-        resourcePool = 1000000;
+        resourcePool = 10000;
 
         if (this.gameObject.tag == "Team 1")
         {
