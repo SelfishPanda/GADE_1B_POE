@@ -18,20 +18,16 @@ public class Wizard : Unit
 
         random = Random.Range(0, 2);
 
-        hP = 120;
+        hP = 175;
         maxHP = hP;
-        attack = 6;
+        attack = 9;
         attackRange = 1;
-        speed = 1;
+        speed = 2;
         name = "Mage";
         isAttacking = false;
         team = "Neutral";
        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }

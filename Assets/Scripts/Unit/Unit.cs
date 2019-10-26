@@ -198,7 +198,19 @@ public abstract class Unit : MonoBehaviour
 
     public void WizardAOE(Unit[] units)
     {
+       
+            for (int i = 0; i < units.Length; i++)
+            {
+                if (Vector3.Distance(units[i].transform.position,this.transform.position)<this.AttackRange)
+                {
+                    if (units[i].Name != "Wizard")
+                    {
+                        Combat(units[i]);
+                    }
 
+                }
+            }
+        
     }
 
 }
