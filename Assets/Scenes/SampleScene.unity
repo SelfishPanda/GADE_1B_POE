@@ -458,6 +458,11 @@ MonoBehaviour:
   - {fileID: 2286348751707593333, guid: 9bd01a9ad5c574d47ab2ea94572713fb, type: 3}
   - {fileID: 3603231281973876642, guid: fcb38ac1822311b4e94df3f69b7e6a56, type: 3}
   - {fileID: 8542741107189704112, guid: 2dfa8310c0a530247b89bb0f4a590147, type: 3}
+  - {fileID: 1785756199924778773, guid: 15a7d595ce0d484469f2038b50d191bb, type: 3}
+  - {fileID: 1720036312468607404, guid: 601a81bd4b71a36479bd0c8202c89154, type: 3}
+  - {fileID: 2793128002916112758, guid: 8fe1a8bbd6542ea45a1ee9bf1c915334, type: 3}
+  - {fileID: 5829605830572552426, guid: 0497968612c9f7e488bf1d093c6f209c, type: 3}
+  Resources: 0
 --- !u!1001 &9008228894516435786
 PrefabInstance:
   m_ObjectHideFlags: 0

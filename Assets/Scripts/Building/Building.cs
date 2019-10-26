@@ -6,14 +6,10 @@ public abstract class Building : MonoBehaviour
 {
     protected int hP;
     protected int maxHP;
-    protected string team;  
+    protected string team;
+   
 
-    public Building(int hP, string team)
-    {
-        this.hP = hP;
-        maxHP = hP;
-        this.team = team;
-    }
+   
 
     public int HP { get => hP; set => hP = value; }
     public int MaxHP { get => maxHP;}
@@ -36,5 +32,7 @@ public abstract class Building : MonoBehaviour
     
 
     public abstract string toString();
+
+    
 }
 

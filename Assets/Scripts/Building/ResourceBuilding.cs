@@ -8,13 +8,27 @@ public class ResourceBuilding : Building
     protected int resourcesGenerated;
     protected int resourcesGeneratedPerRound;
     protected int resourcePool;
-
-    public ResourceBuilding(int hP, string team, string resourceType, int resourcesGenerated, int resourcesGeneratedPerRound, int resourcePool) : base(hP,team)
+    GameEngine gameEngine;
+  
+    // Start is called before the first frame update
+    void Start()
     {
-        this.resourceType = resourceType;
-        this.resourcesGenerated = 0;
-        this.resourcesGeneratedPerRound = resourcesGeneratedPerRound;
-        this.resourcePool = resourcePool;
+        gameEngine = GameObject.FindObjectOfType<GameEngine>();
+        hP = 2000;
+        maxHP = 2000;
+        resourceType = "Adamantium";
+        resourcesGeneratedPerRound = 1;
+        resourcesGenerated = 0;
+        resourcePool = 1000000;
+
+        if (this.gameObject.tag == "Team 1")
+        {
+            team = "Team 1";
+        }
+        else
+        {
+            team = "Team 2";
+        }
     }
 
     public string ResourceType { get => resourceType; set => resourceType = value; }
@@ -22,16 +36,34 @@ public class ResourceBuilding : Building
     public int ResourcesGeneratedPerRound { get => resourcesGeneratedPerRound; set => resourcesGeneratedPerRound = value; }
     public int ResourcePool { get => resourcePool; set => resourcePool = value; }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        
+        if (HP <= 0)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            if (ResourcePool <= 0 )
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                if (Team == "Team 1")
+                {
+                    gameEngine.t1Resources += resourcesGeneratedPerRound;
+                    ResourcePool -= resourcesGeneratedPerRound;
+                }
+                else
+                {
+                    gameEngine.t2Resources += resourcesGeneratedPerRound;
+                    ResourcePool -= resourcesGeneratedPerRound;
+                }
+               
+            }
+        }
     }
 
 

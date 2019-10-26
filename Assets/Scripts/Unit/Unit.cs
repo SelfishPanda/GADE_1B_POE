@@ -163,8 +163,10 @@ public abstract class Unit : MonoBehaviour
         else
         {
             
-            Unit[] Units;                      
-            Units = GameObject.FindObjectsOfType<Unit>();            
+            Unit[] Units;
+            Building[] buildings;
+            Units = GameObject.FindObjectsOfType<Unit>();
+            buildings = GameObject.FindObjectsOfType<Building>();
             Unit closestUnit = ClosestUnit(Units);
 
 

@@ -4,34 +4,66 @@ using UnityEngine;
 
 public class FactoryBuilding : Building
 {
-    protected string unitToProduce;
+    protected int unitToProduce;
     protected int productionSpeed;
-    protected int spawnYPos;
+    public Vector3 spawnYPos;
     protected int unitsProduced;
 
-    public FactoryBuilding(int hP, string team,string unitToProduce, int productionSpeed, int spawnYPos) : base(hP, team)
-    {
-        this.unitToProduce = unitToProduce;
-        this.productionSpeed = productionSpeed;
-        this.spawnYPos = spawnYPos;
-        this.unitsProduced = 0;
-    }
+    GameEngine gameEngine;
 
-    public string UnitToProduce { get => unitToProduce;}
-    public int ProductionSpeed { get => productionSpeed;}
-    public int SpawnYPos { get => spawnYPos;}
-    public int UnitsProduced { get => unitsProduced; set => unitsProduced = value; }
+
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        gameEngine = GameObject.FindObjectOfType<GameEngine>();
+        hP = 2000;
+        maxHP = 2000;
+        this.productionSpeed = 2000;
+        spawnYPos = new Vector3(transform.position.x,0,transform.position.z-1);
+        unitToProduce = Random.Range(0, 2);
+        this.unitsProduced = 0;
+
+        if (this.gameObject.tag == "Team 1")
+        {
+            team = "Team 1";
+        }
+        else
+        {
+            team = "Team 2";
+        }
+
     }
+
+    public int UnitToProduce { get => unitToProduce; }
+    public int ProductionSpeed { get => productionSpeed; }
+    public int UnitsProduced { get => unitsProduced; set => unitsProduced = value; }
 
     // Update is called once per frame
     void Update()
     {
+        if (HP <= 0)
+        {
+            Destroy(gameObject);
+        }
+        if (Team == "Team 1")
+        {
+            if (gameEngine.t1Resources >= ProductionSpeed)
+            {
+                gameEngine.FactoryCreate(unitToProduce, Team);
+            }
+        }
+        else
+        {
+            if (gameEngine.t2Resources >= ProductionSpeed)
+            {
+                gameEngine.FactoryCreate(unitToProduce, Team);
+            }
+        }
         
     }
 
