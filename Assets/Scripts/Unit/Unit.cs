@@ -14,6 +14,7 @@ public abstract class Unit : MonoBehaviour
     protected string team;
     protected bool isAttacking;
     [SerializeField] public Image healthBar;
+    
 
     public int HP { get => hP; set => hP = value; }
     public int MaxHP { get => maxHP;}
@@ -48,15 +49,23 @@ public abstract class Unit : MonoBehaviour
         Unit Closestunit = null;
         Debug.Log(units.Length);
         foreach (Unit unit in units)
-         {
-            Debug.Log(unit.Name);
-                 distance = Vector3.Distance(transform.position,unit.transform.position);
-                 if (distance < closestDist)
-                 {
-                     closestDist = distance;
-                     Closestunit = unit;
-                 }             
-         }        
+        {
+
+            distance = Vector3.Distance(transform.position, unit.transform.position);
+            if (unit.Team == this.Team)
+            {
+            }
+            else
+            {
+
+
+                if (distance < closestDist)
+                {
+                    closestDist = distance;
+                    Closestunit = unit;
+                }
+            }
+        }
         Debug.Log(Closestunit.ToString());
          Debug.DrawLine(this.transform.position, Closestunit.transform.position);
        
@@ -140,33 +149,7 @@ public abstract class Unit : MonoBehaviour
         return output;
     }  
 
-    public Unit[] EnemyUnits(Unit[] Units)
-    {
-        Unit[] enemyUnits = new Unit[0];
-
-        for (int i = 0; i < Units.Length; i++)
-        {
-            if (this.Team == "Team 2")
-            {
-                if (Units[i].Team == "Team 1")
-                {
-                    System.Array.Resize(ref enemyUnits, enemyUnits.Length+1);
-                    enemyUnits[enemyUnits.Length-1] = Units[i]; 
-                    
-                }
-            }
-            if (this.Team == "Team 1")
-            {
-                if (Units[i].Team == "Team 2")
-                {
-                    System.Array.Resize(ref enemyUnits, enemyUnits.Length + 1);
-                    enemyUnits[enemyUnits.Length - 1] = Units[i];
-                }
-            }
-
-        }
-        return enemyUnits;
-    }
+   
 
 
 
@@ -179,11 +162,11 @@ public abstract class Unit : MonoBehaviour
         }
         else
         {
-            Unit[] Units;           
-            Unit[] EnemyUnits;
-            Units = GameObject.FindObjectsOfType<Unit>();
-            EnemyUnits = this.EnemyUnits(Units);
-            Unit closestUnit = ClosestUnit(EnemyUnits);
+            
+            Unit[] Units;                      
+            Units = GameObject.FindObjectsOfType<Unit>();            
+            Unit closestUnit = ClosestUnit(Units);
+
 
             if (closestUnit == this)
             { }
@@ -197,15 +180,24 @@ public abstract class Unit : MonoBehaviour
                 }
                 else
                 {
-                    Combat(closestUnit);
-                    Debug.Log(closestUnit.HP);
+                    if (this.Name == "Wizard")
+                    {
+                        WizardAOE(Units);
+                    }
+                    else
+                    {
+                        Combat(closestUnit);
+                    }
                 }
             }
         }
 
         healthBar = GetComponentsInChildren<Image>()[1];
         healthBar.fillAmount = (float)HP / MaxHP;
+    }
 
+    public void WizardAOE(Unit[] units)
+    {
 
     }
 

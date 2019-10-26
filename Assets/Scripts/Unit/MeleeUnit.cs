@@ -32,8 +32,7 @@ public class MeleeUnit : Unit
             team = "Team 2";
         }
     }
-
-    // Update is called once per frame
+   
    
 
 }

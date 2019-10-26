@@ -4,9 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Units
   - Team 2
   - Team 1
+  - Neutral
   layers:
   - Default
   - TransparentFX

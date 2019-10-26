@@ -23,8 +23,9 @@ public class RangedUnit : Unit
         speed = 1;
         name = "Archer";
         isAttacking = false;
+        
 
-        if (random == 0)
+        if (this.gameObject.tag == "Team 1")
         {
             team = "Team 1";
         }
@@ -32,14 +33,8 @@ public class RangedUnit : Unit
         {
             team = "Team 2";
         }
-       
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-        
-    }
+   
 }
