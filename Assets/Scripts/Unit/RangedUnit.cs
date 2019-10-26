@@ -16,9 +16,9 @@ public class RangedUnit : Unit
 
         random = Random.Range(0, 2);
             
-        hP = 60;
+        hP = 600;
         maxHP = hP;
-        attack = 7;
+        attack = 2;
         attackRange = 2;
         speed = 1;
         name = "Archer";

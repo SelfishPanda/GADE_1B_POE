@@ -18,7 +18,7 @@ public class Wizard : Unit
 
         random = Random.Range(0, 2);
 
-        hP = 175;
+        hP = 1000;
         maxHP = hP;
         attack = 9;
         attackRange = 1;

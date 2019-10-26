@@ -15,7 +15,7 @@ public class MeleeUnit : Unit
     {
         int random = 0;
         random = Random.Range(0, 2);
-        hP = 80;
+        hP = 800;
         maxHP = hP;
         attack = 5;
         attackRange = 1;

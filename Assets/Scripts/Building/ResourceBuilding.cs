@@ -14,7 +14,7 @@ public class ResourceBuilding : Building
     void Start()
     {
         gameEngine = GameObject.FindObjectOfType<GameEngine>();
-        hP = 2000;
+        hP = 3000;
         maxHP = 2000;
         resourceType = "Adamantium";
         resourcesGeneratedPerRound = 1;

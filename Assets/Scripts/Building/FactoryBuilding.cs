@@ -8,7 +8,7 @@ public class FactoryBuilding : Building
     protected int productionSpeed;
     public Vector3 spawnYPos;
     protected int unitsProduced;
-
+    private bool spawned;
     GameEngine gameEngine;
 
 
@@ -21,9 +21,9 @@ public class FactoryBuilding : Building
     {
 
         gameEngine = GameObject.FindObjectOfType<GameEngine>();
-        hP = 2000;
+        hP = 3000;
         maxHP = 2000;
-        this.productionSpeed = 2000;
+        this.productionSpeed = 200;
         spawnYPos = new Vector3(transform.position.x,0,transform.position.z-1);
         unitToProduce = Random.Range(0, 2);
         this.unitsProduced = 0;
@@ -54,14 +54,31 @@ public class FactoryBuilding : Building
         {
             if (gameEngine.t1Resources >= ProductionSpeed)
             {
-                gameEngine.FactoryCreate(unitToProduce, Team);
+                if (spawned)
+                {
+                    spawned = false;
+                }
+                else
+                {
+                    gameEngine.FactoryCreate(unitToProduce, Team, spawnYPos);
+                    spawned = true;
+                }
+               
             }
         }
         else
         {
             if (gameEngine.t2Resources >= ProductionSpeed)
             {
-                gameEngine.FactoryCreate(unitToProduce, Team);
+                if (spawned)
+                {
+                    spawned = false;
+                }
+                else
+                {
+                    gameEngine.FactoryCreate(unitToProduce, Team, spawnYPos);
+                    spawned = true;
+                }
             }
         }
         
